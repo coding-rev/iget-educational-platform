@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Registered Courses{% endblock %}
+{% block listLessonsActive %} active {% endblock %}
+{% load static %} 
+{% block content %}
+
+
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <header class="entry-header">
+        <h1 class="entry-title">Enrolled Courses</h1>
+      </header>
+    </div> 
+  </div>
+</div>
+<div class="page-spacer clearfix">
+  <div id="primary">
+    <div class="container">
+      <div class="row">
+        <main id="main" class="site-main col-xs-12 school-events">
+          <!-- Getting all orders -->
+          {% for registeredCourse in objects %}
+            <!-- Getting one order items -->
+            {% for course in registeredCourse.items.all %}
+              <div class="col-xs-12 col-sm-4">
+              <div class="events">
+                <a class="img-thumb"><figure>
+                  <img src="{{course.item.image.url}}" alt="" /></figure></a>
+                  <div class="events-info">
+                    <h3><a>{{course.item.title}}</a></h3>
+                    <p class="location" style="font-weight: 600;">Tutor: {{course.item.author}}</p>
+                    <p>{{course.item.description|truncatewords:"10"}}</p>
+                    <ul class="events-time">
+                      <li><span>Aug 25 -27, 2015</span>
+                      Date </li>
+                      <li><span>09:00 AM</span>
+                      Time</li>
+                    </ul>
+                    <a href="{% url 'courses:lesson' course.item.id %}" class="know-more">Start Lesson<i class="lnr lnr-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div> 
+            {% endfor %}
+          {% empty %}
+            <center>
+              <h1>No enrolled course</h1>
+            </center>
+          {% endfor %}
+          </main>
+        </div> 
+      </div> 
+    </div>
+  </div> 
+  <section class="call-to-action">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="col-xs-12 col-sm-8">
+            <h3>Remaining essentially unchanged.</h3>
+            <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+          <a href="events.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+        </div>
+      </div> 
+    </div>
+  </section> 
+  {% endblock %}

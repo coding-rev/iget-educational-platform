@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %} Login {% endblock %}
+{% block content %}
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Login</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+      <div class="page-spacer clearfix">
+        <div id="primary" class="content-area">
+          <div class="container">
+            <div class="row">
+              <main id="main" class="site-main col-xs-12">
+                <div class="col-xs-12 col-sm-6 login-form form">
+                  <h3>Login</h3>
+                  <form name="loginform" id="login" method="post">
+                        {% csrf_token %}
+                        {{form}}
+                        <p> Don't have an account? <a href="/register">Create an Account</a> now! </p>
+                        <label><a href="login.html#">Forgot Password?</a></label>
+                        <input name="submit" id="submit" class="btn btn-default" value="Log In" type="submit">
+                      </form>
+                    </div> 
+                  </main>
+                </div> 
+              </div> 
+            </div>
+          </div>
+          <section class="call-to-action">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="col-xs-12 col-sm-8">
+                    <h3>Remaining essentially unchanged.</h3>
+                    <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                  </div>
+                  <a href="login.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+                </div>
+              </div> 
+            </div>
+          </section> 
+         {% endblock %}

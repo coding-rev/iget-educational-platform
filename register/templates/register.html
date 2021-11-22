@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Sign up {% endblock %}
+{% block content %}
+
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Register</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+      <div class="page-spacer clearfix">
+        <div id="primary" class="content-area">
+          <div class="container">
+            <div class="row">
+              <main id="main" class="site-main col-xs-12">
+
+                <div class="col-xs-12 col-sm-10 register-form form clearfix">
+                  <h3>Register</h3>
+                    
+                    {% if messages %}
+                      {% for message in messages %}
+                        <div  class="alert alert-{{message.tags }}" style="color:red" role="alert">
+                            {{message}}
+                        </div>
+                      {% endfor %}
+                    {% endif %}    
+
+                  <form name="loginform" id="student-settings" class="student-settings" method="post">
+                    {% csrf_token %}
+                    <label>First Name <input name="first-name" value="" type="text" required></label>
+                    <label>Last Name <input name="last-name" value="" type="text" required></label>
+                    <label>User Name <input name="username" value="" type="text" required></label>
+                    <label>Email <input name="email" value="" type="text" required></label>
+                    <label>Password <input name="password" value="" type="password" required></label>
+                    <label>Confirm Password: <input name="confirm-password" value="" type="password" required></label>
+                    
+                    <p>Already have an account? <a href="/login">Login to your account</a>!</p>
+                    <input name="submit" class="btn btn-default pull-right" value="Create an Account" type="submit">
+                  
+                  </form>
+                </div> 
+              </main>
+            </div> 
+          </div> 
+        </div>
+      </div>
+      <section class="call-to-action">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="col-xs-12 col-sm-8">
+                <h3>Remaining essentially unchanged.</h3>
+                <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+              </div>
+              <a href="register.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+            </div>
+          </div> 
+        </div>
+      </section> 
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block title %} 
+  Courses 
+{% endblock %}
+
+{% block content %}
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Classes</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+
+      {% if messages %}
+                      {% for message in messages %}
+                        <div  class="alert alert-{{message.tags }}" style="color:blue" role="alert">
+                            {{message}}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+
+      <div class="page-spacer clearfix">
+        <div id="primary">
+          <div class="container">
+            <div class="row">
+              <main id="main" class="site-main col-xs-12 col-sm-8 left-block">
+                <div class="school-classes inner-classes">
+                  
+                  {% for course in courses %}
+                  <div class="col-xs-12 col-sm-6 zoom">
+                    <div class="classes">
+                      <a href="{% url 'courses:course-detail' course.id %}" class="img-thumb"><figure>
+                        <img src="{{course.image.url}}" alt="" />
+                      </figure></a>
+                      <div class="classes-info">
+                        <div class="price">
+                        {% if course.free_price %}
+                         <del style="font-size: 10px;color:grey">{{course.price}} </del> Free
+                        {% else %}
+                            {% if course.discount_price %}
+                              <del style="font-size: 10px;color:grey">${{course.price}}</del> ${{course.discount_price}}
+                            {% else %}
+                              ${{course.price}}
+                            {% endif %}
+                        {% endif %}
+                    <small></small></div>
+                        <h3><a href="classes-2-columns.html#">{{course.title}} </a></h3>
+                        <p>{{course.description|truncatewords:"10"}}</p>
+                        
+                        <ul class="classes-time">
+                          <li><span>{{course.author.username}}</span>
+                          Author</li>
+                          <li>
+                            {% if course.free_price %}
+                              <span>FREE</span>
+                            {% else %}
+                               {% if course.discount_price %}
+                              <span>{{course.discount_price}}</span>
+                              {% else %}
+                              <span>{{course.price}}</span>
+                              {% endif %}
+                            {% endif %}
+                            Price
+                          </li>
+                          <li><span>{{course.course_length}}</span>
+                          Class Length</li>
+                        </ul>
+                      <input type="button" onclick="document.location.href='{% url 'cart:add-to-cart' course.id %}'" value="Add to cart" class="btn btn-mt15 btn-default">
+                      </div>
+                    </div>
+                  </div> 
+                {% endfor %}
+                  
+                </div> 
+                <!-- <div class="pagination">
+                  <span class="page-numbers current">1</span>
+                  <a href="classes-2-columns.html#" class="page-numbers">2</a>
+                  <a href="classes-2-columns.html#" class="page-numbers">3</a>
+                  <a href="classes-2-columns.html#" class="next page-numbers"><i class="fa fa-angle-right"></i></a>
+                </div> -->
+              </main>
+
+              <div class="widget-area col-xs-12 col-sm-4 pull-right" id="secondary">
+                <aside class="widget widget_search">
+                  <h3 class="widget-title">Search Course</h3>
+                  <form action="classes-2-columns.html#" class="search-form search-course">
+                    <input type="search" title="What do you want to learn today?" name="s" value="" placeholder="What do you want to learn today?" class="search-field">
+                    <button type="submit" class="btn btn-orange btn-medium course-submit"> <i class="lnr lnr-magnifier"></i> </button>
+                  </form>
+                </aside>
+                <aside class="widget widget_search_filter">
+                  <h3 class="widget-title">Price</h3>
+                  <ul class="filter">
+                    <li>
+                      <div class="checkbox">
+                        <input type="checkbox" value="off" id="free" name="free" class="styled">
+                        <label for="free"> Free </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="checkbox">
+                        <input type="checkbox" value="on" id="paid" name="paid" class="styled">
+                        <label for="paid"> Paid </label>
+                      </div>
+                    </li>
+                  </ul>
+                </aside>
+                <aside class="widget widget_search_filter">
+                  <h3 class="widget-title">Language</h3>
+                  <ul class="filter">
+                    <li>
+                      <div class="checkbox">
+                        <input type="checkbox" value="English" name="lang" class="langfil styled" id="English">
+                        <label for="English"> English </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="checkbox">
+                        <input type="checkbox" value="Spain" name="lang" class="langfil styled" id="Spain">
+                        <label for="Spain"> Spain </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="checkbox">
+                        <input type="checkbox" value="German" name="lang" class="langfil styled" id="German">
+                        <label for="German"> German </label>
+                      </div>
+                    </li>
+                  </ul>
+                </aside>
+                <aside class="widget cp_course_categories">
+                  <h3 class="widget-title">Category</h3>
+                  <ul>
+                    <li> <a href="classes-2-columns.html#">Food Recipe</a> (2) </li>
+                    <li> <a href="classes-2-columns.html#">Frontend</a> (3) </li>
+                    <li> <a href="classes-2-columns.html#">Multi Language</a> (2) </li>
+                    <li> <a href="classes-2-columns.html#">Music</a> (2) </li>
+                    <li> <a href="classes-2-columns.html#">Sports</a> (4) </li>
+                    <li> <a href="classes-2-columns.html#">Web Development</a> (10)</li>
+                  </ul>
+                </aside>
+                <aside class="widget widget_courses">
+                  <h3 class="widget-title">Featured Classes</h3>
+                  <ul>
+                    <li class="clearfix">
+                      <div class="course-thumbnail">
+                        <img alt="" class="course-media-img" src="{% static 'images/use_img/widget-thumb.jpg' %}">
+                      </div>
+                      <div class="simi-co">
+                        <h5><a href="classes-2-columns.html#">JavaScript: Understanding the Weird Parts</a></h5>
+                        <p class="meta"><a href="classes-2-columns.html#">James Bond</a></p>
+                        <p><span class="simi-price">$65</span>
+                          <span class="rating">
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                          </span>
+                        </p>
+                      </div>
+                    </li>
+                    <li class="clearfix">
+                      <div class="course-thumbnail">
+                        <img alt="" class="course-media-img" src="{% static 'images/use_img/widget-thumb.jpg' %}">
+                      </div>
+                      <div class="simi-co">
+                        <h5><a href="classes-2-columns.html#">Become an iOS Developer from Scratch</a></h5>
+                        <p class="meta"><a href="classes-2-columns.html#">Greg Christman</a></p>
+                        <p><span class="simi-price">$66</span>
+                          <span class="rating">
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                            <i class="glyphicons glyphicon-star"></i>
+                          </span></p>
+                        </div>
+                      </li>
+                      <li class="clearfix">
+                        <div class="course-thumbnail">
+                          <img alt="" class="course-media-img" src="{% static 'images/use_img/widget-thumb.jpg' %}">
+                        </div>
+                        <div class="simi-co">
+                          <h5><a href="classes-2-columns.html#">Ionic by Example: Create Mobile Apps in HTML5</a></h5>
+                          <p class="meta"><a href="classes-2-columns.html#">Emma Wilson</a></p>
+                          <p><span class="simi-price">$35</span>
+                            <span class="rating">
+                              <i class="glyphicons glyphicon-star"></i>
+                              <i class="glyphicons glyphicon-star"></i>
+                              <i class="glyphicons glyphicon-star"></i>
+                              <i class="glyphicons glyphicon-star-empty"></i>
+                              <i class="glyphicons glyphicon-star-empty"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
+                  </aside>
+                </div>
+
+              </div> 
+            </div> 
+          </div>
+        </div> 
+        <section class="call-to-action">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-8">
+                  <h3>Remaining essentially unchanged.</h3>
+                  <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <a href="classes-2-columns.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+              </div>
+            </div> 
+          </div>
+        </section> 
+    {% endblock %}

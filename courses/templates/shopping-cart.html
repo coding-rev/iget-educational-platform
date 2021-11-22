@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %} Shopping Cart {% endblock %}
+{% block content %}
+      <style>
+        .cart-btns:hover,
+        .cart-btns:focus
+        {
+          cursor: pointer;
+        }
+      </style>
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Shopping Cart</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+      {% if messages %}
+                      {% for message in messages %}
+                        <div  class="alert alert-{{message.tags }}" style="color:blue" role="alert">
+                            {{message}}
+                        </div>
+                      {% endfor %}
+                    {% endif %}  
+      <div class="page-spacer clearfix">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div id="no-more-tables">
+                <table class="table shopping-table">
+                  <thead>
+                    <tr class="cart-headers">
+                      <th></th>
+                      <th>Item</th>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Discount</th>
+                      <th>Quantity</th>
+                      
+                    </tr>
+                  </thead>
+                  
+
+                  <tbody>
+                    {% if objects %}
+                        {% for orderItem in objects.items.all %}
+                        <tr>
+                          <td><a href="{% url 'cart:remove-from-cart' orderItem.item.id %}"><i class="fa fa-close"></i></a></td>
+                          <td><a href="#"><img src="{{orderItem.item.image.url}}" alt="" /></a></td>
+                          <td><a href="#">{{orderItem.item.title}}</a></td>
+                          {% if orderItem.item.free_price %}
+                            <td>Free</td>
+                            <td>---</td>
+                          {% else %}  
+                            {% if orderItem.item.discount_price %}
+                              <td><del>${{orderItem.item.price}}</del></td>
+                              <td style="color:blue">${{orderItem.item.discount_price}}</td>
+                            {% else %}
+                              <td>${{orderItem.item.price}}</td>
+                              <td> ---  </td>
+                            {% endif %}
+                          {% endif %}
+                          <td style="display:flex; flex-direction: row;">
+                            <input type="text" value="{{orderItem.quantity}}" class="form-control qty" disabled>
+                          </td>
+                          
+                        </tr>
+                      {% empty %}
+                        <style>
+                          .cart-headers{
+                            display: none;
+                          }
+                        </style>
+                        <tr>
+                          <td>
+                            <h1>Your cart is empty</h1>
+                          </td>
+                        </tr>
+                        
+
+                      {% endfor %}
+                    {% else %}
+
+                      <style>
+                          .cart-headers{
+                            display: none;
+                          }
+                        </style>
+                        <tr>
+                          <td>
+                            <h1>Your cart is empty</h1>
+                          </td>
+                        </tr>
+
+                    {% endif %}
+                  </tbody>
+                  
+
+
+                  <tbody>
+                    <tr>
+                        <td colspan="3" class="text-right">
+                          <input name="Proceed to Checkout" type="button" onclick="document.location.href='{% url 'courses:list-courses' %}'" value="Continue shopping" class="btn btn-medium btn-orange">
+                        </td>
+                        <td colspan="3" class="text-right">
+                          <input name="Proceed to Checkout" onclick="document.location.href='{% url 'cart:checkout' %}'" type="button" value="Proceed to Checkout" class="btn btn-medium btn-orange">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> 
+                <div class="col-xs-12 col-sm-12 cart-total">
+                  <h3>Cart Totals</h3>
+                  <ul>
+                    
+                    <li><label>Cart Subtotal</label> <span>
+                    {{objects.get_total}}
+                    </span> </li>
+                    <li><label>Shipping and Handling</label> <span>Free Shipping</span> </li>
+                    <li><label>Order Total</label> <span>
+                      {{objects.get_total}}
+                    </span>
+                    </li>
+                  </ul>
+                  <br>
+                  <input type="submit" value="Proceed to Checkout" class="btn btn-mt15 btn-default">
+                </div> 
+                
+              </div>
+            </div> 
+          </div>
+        </div> 
+        <section class="call-to-action">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-8">
+                  <h3>Remaining essentially unchanged.</h3>
+                  <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <a href="shopping-cart.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+              </div>
+            </div> 
+          </div>
+        </section> 
+
+        
+{% endblock %}
+

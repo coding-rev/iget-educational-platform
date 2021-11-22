@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} My Account {% endblock %}
+
+{% load static %} 
+{% block content %}
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Register As An Instructor</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+      <div class="page-spacer clearfix">
+        <div id="primary" class="content-area">
+          <div class="container">
+            <div class="row">
+              <main id="main" class="site-main col-xs-12">
+                <div class="col-xs-12 col-sm-10 register-form edit-profile form clearfix">
+                  <h3>Register As An Instructor</h3>
+                  <form name="loginform" id="student-settings" class="student-settings" method="post">
+                    <label>First Name <input name="first-name" value="" placeholder="{{request.user.first_name}}" type="text"></label>
+                    <label>Last Name <input name="last-name" value="" placeholder="{{request.user.last_name}}" type="text"></label>
+                    <label>Email <input name="email" value="" placeholder="{{request.user.email}}" type="text"></label>
+                    <label>User Name <input name="username" value="{{request.user.username}}" disabled="disabled" type="text"></label>
+                    <label>Password <input name="password" value="" placeholder="Won't change if empty." type="password"> </label>
+                    <label>Confirm Password: <input name="confirm-password" value="" type="password"></label>
+                    <input name="submit" class="btn btn-default pull-right" value="Save Changes" type="submit"><br><br>
+                  </form>
+                </div>
+
+                <div class="col-xs-12 col-sm-10 register-form edit-profile form clearfix">
+                  <h3>Edit Address</h3>
+                  <form name="loginform" id="student-settings" class="student-settings" method="post">
+                    <label>First Name <input name="first-name" value="" placeholder="{{request.user.first_name}}" type="text"></label>
+                    <label>Last Name <input name="last-name" value="" placeholder="{{request.user.last_name}}" type="text"></label>
+                    <label>Email <input name="email" value="" placeholder="{{request.user.email}}" type="text"></label>
+                    <label>User Name <input name="username" value="{{request.user.username}}" disabled="disabled" type="text"></label>
+                    <label>Password <input name="password" value="" placeholder="Won't change if empty." type="password"> </label>
+                    <label>Confirm Password: <input name="confirm-password" value="" type="password"></label>
+                    <input name="submit" class="btn btn-default pull-right" value="Save Changes" type="submit">
+                  </form>
+                </div>
+                
+              </main>
+            </div> 
+          </div> 
+        </div>
+      </div>
+      <section class="call-to-action">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="col-xs-12 col-sm-8">
+                <h3>Remaining essentially unchanged.</h3>
+                <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+              </div>
+              <a href="edit-profile.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+            </div>
+          </div> 
+        </div>
+      </section> 
+     {% endblock %}

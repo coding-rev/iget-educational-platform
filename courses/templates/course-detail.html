@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Course Detail {% endblock %}
+{% block content %}
+<div class="breadcrumb-section">
+	<div class="container">
+		<div class="row">
+			<header class="entry-header">
+				<h1 class="entry-title">Classes</h1>
+			</header>
+		</div> 
+	</div>
+</div>
+<div class="breadcrumb-detail-page">
+	<div class="container">
+		<div class="row">
+			<p><a href="classes-details.html#">HOME</a><i class="fa fa-angle-right"></i><a href="{% url 'courses:list-courses' %}">ALL Courses</a><i class="fa fa-angle-right"></i></i>{{course.title}}</p>
+		</div> 
+	</div>
+</div>
+{% if messages %}
+                      {% for message in messages %}
+                        <div  class="alert alert-{{message.tags }}" style="color:blue" role="alert">
+                            {{message}}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+<div class="page-spacer co-detail-page clearfix">
+	<div id="primary">
+		<div class="container">
+			<div class="row">
+				<main id="main" class="site-main col-xs-12 col-sm-8 left-block">
+					<div class="courses-info">
+						<h1>{{course.title}}</h1>
+						<p class="excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<p class="meta">Instructed by: <a href="classes-details.html#">Greg Christman</a> . in: <a href="classes-details.html#">Icon Design</a></p>
+					</div>
+					<a class="img-thumb " href="classes-details.html#">
+						<figure>
+							<img alt="" src="{{course.image.url}}">
+						</figure>
+					</a>
+					<div class="courses-info">
+						<h3>COURSE DESCRIPTION</h3>
+						<p>{{course.description}}</p>
+
+
+						<section class="courses-curriculum clearfix">
+							<h3>Curriculum</h3>
+
+							{% for episode in courseEpisodes %}
+								<h4>Section 1: Introduction</h4>
+								<ul>
+									<li class="courses-open"><span class="no">1</span>
+										<p class="ctitle">
+											<span class="title"><i class="fa fa-play-circle"></i> Welcome to the Course! <a href="classes-details.html#"><i class="fa fa-angle-down"></i></a></span>
+											<span class="type">Video</span></p>
+											<span class="preview">Preview</span>
+											<p class="other">
+												<span class="time"><i class="fa fa-clock-o"></i> 11:30</span>
+												<span class="info"><i class="fa fa-lock"></i> PDF file</span></p>
+											</li>
+											<li class="courses-close"><span class="no">2</span>
+												<p class="ctitle">
+													<span class="title"><i class="fa fa-file"></i> Course Introduction and Manual<a href="classes-details.html#"><i class="fa fa-angle-up"></i></a></span>
+													<span class="type free">Free</span></p>
+													<p class="other">
+														<span class="info"><i class="fa fa-paperclip"></i> PDF file</span></p>
+														<div class="desc">
+															<p>It has survived not only five centuries.
+															but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+															<p><a href="classes-details.html#">Download PDF</a></p>
+														</div>
+													</li>
+												</ul>
+								{% endfor %}
+																 
+																	</section>
+
+
+																	<section class="courses-instructor clearfix">
+																		<h3>ABOUT INSTRUCTOR</h3>
+																		<div class="row instructor-single">
+																			<div class="col-xs-12 col-sm-2"> <img class="avatar" src="{% static 'images/use_img/author_img.png' %}" alt="" /> </div>
+																			<div class="col-xs-12 col-sm-9">
+																				<h3 class="inst-name"><a href="classes-details.html#">Greg Christman</a></h3>
+																				<p class="meta">Head In Nichola's Sports Academy</p>
+																				<ul class="social-icons">
+																					<li><a href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+																					<li><a href="http://facebook.com/"><i class="fa fa-facebook-square"></i></a></li>
+																					<li><a href="http://linkedin.com/"><i class="fa fa-linkedin-square"></i></a></li>
+																					<li><a href="http://google.com/"><i class="fa fa-google-plus"></i></a></li>
+																					<li><a href="http://pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+																					<li><a href="http://instagram.com/"><i class="fa fa-instagram"></i></a></li>
+																					<li><a href="http://youtube.com/"><i class="fa fa-youtube"></i></a></li>
+																				</ul>
+																			</div>
+																			<div class="about-instr clearfix">
+																				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet nulla sed neque congue pharetra sed sed leo. Pellentesque elementum porttitor libero hendrerit porta. Aenean vitae odio semper, iaculis nibh non, hendrerit augue. Nam non tincidunt justo, eu fermentum nulla</p>
+																			</div>
+																		</div>
+																	</section>
+
+																</div> 
+																<div class="courses-info clearfix">
+																	<div class="courses-review clearfix">
+																		<h3>REVIEWS</h3>
+																		<div class="col-xs-12 col-sm-3 average-rating">
+																			<p>Average Rating</p>
+																			<p class="total-rating">4.8</p>
+																			<div class="course_rating">
+																				<i class="glyphicons glyphicon-star"></i>
+																				<i class="glyphicons glyphicon-star"></i>
+																				<i class="glyphicons glyphicon-star"></i>
+																				<i class="glyphicons glyphicon-star"></i>
+																				<i class="glyphicons glyphicon-star"></i>
+																			</div>
+																			<p>12 ratings</p>
+																		</div>
+																		<div class="col-xs-12 col-sm-4">
+																			<p>Details</p>
+
+																			<div class="stars-rating">
+																				<span>5 Stars</span>
+																				<div class="progress active">
+																					<div class="progress-bar" style="width:90%"></div>
+																				</div>
+																				<span>9</span>
+																			</div>
+
+																			<div class="stars-rating">
+																				<span>4 Stars</span>
+																				<div class="progress active">
+																					<div class="progress-bar" style="width:30%"></div>
+																				</div>
+																				<span>3</span>
+																			</div>
+
+																			<div class="stars-rating">
+																				<span>3 Stars</span>
+																				<div class="progress active">
+																					<div class="progress-bar" style="width:0"></div>
+																				</div>
+																				<span></span>
+																			</div>
+
+																			<div class="stars-rating">
+																				<span>2 Stars</span>
+																				<div class="progress active">
+																					<div class="progress-bar" style="width:0"></div>
+																				</div>
+																				<span></span>
+																			</div>
+
+																			<div class="stars-rating">
+																				<span>1 Stars</span>
+																				<div class="progress active">
+																					<div class="progress-bar" style="width:0"></div>
+																				</div>
+																				<span></span>
+																			</div>
+																		</div> 
+																	</div> 
+																	<ul class="review-list">
+																		<li>
+																			<img src="{% static 'images/use_img/author_img.png' %}" class="avatar" alt="" />
+																			<div class="review-right col-xs-12 col-sm-9">
+																				<span class="author-name">Greg Christman</span>
+																				<div class="time">
+																					6 months ago
+																					<div class="course_rating">
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="review-des">
+																				<p>Excellent course!</p>
+																				<p>The material was presented in just the right sized topics so that learning and understanding were optimal.
+																				The instructor was articulate and easy to understand. Highly recommend!</p>
+																			</div>
+																		</li>
+																		<li>
+																			<img src="{% static 'images/use_img/author_img.png' %}" class="avatar" alt="" />
+																			<div class="review-right col-xs-12 col-sm-9">
+																				<span class="author-name">Mark Freeman</span>
+																				<div class="time">
+																					6 months ago
+																					<div class="course_rating">
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="review-des">
+																				<p>Well organized and Informative.</p>
+																				<p>The material was presented in just the right sized topics so that learning and understanding were optimal.
+																				The instructor was articulate and easy to understand. Highly recommend!</p>
+																			</div>
+																		</li>
+																	</ul>
+																	<div class="add-review clearfix">
+																		<h3>Add a Review</h3>
+																		<div class="row">
+																			<form class="review_form" method="post" action="classes-details.html#">
+																				<div class="col-xs-12 col-sm-6">
+																					<div class="form_row">
+																						<label>Name <span>*</span></label>
+																						<input name="name" type="text">
+																					</div>
+																				</div>
+																				<div class="col-xs-12 col-sm-6">
+																					<div class="form_row">
+																						<label>Email <span>*</span></label>
+																						<input name="email" type="text">
+																					</div>
+																				</div>
+																				<div class="col-xs-12">
+																					<div class="form_row">
+																						<label>Your Rating</label>
+																						<div class="course_rating">
+																							<span class="glyphicon glyphicon-star-empty"></span>
+																							<span class="glyphicon glyphicon-star-empty"></span>
+																							<span class="glyphicon glyphicon-star-empty"></span>
+																							<span class="glyphicon glyphicon-star-empty"></span>
+																							<span class="glyphicon glyphicon-star-empty"></span>
+																						</div>
+																					</div>
+																					<div class="form_row">
+																						<label>Message <span>*</span></label>
+																						<textarea rows="10" name="message" class=""></textarea>
+																					</div>
+																					<input type="submit" value="Submit" id="submitReview" class="btn btn-default">
+																				</div>
+																			</form>
+																		</div>
+																	</div>
+																</div> 
+															</main>
+
+															<div id="secondary" class="widget-area col-xs-12 col-sm-4 left-block" role="complementary">
+																<div class="co-join-info">
+																	<p class="co-price">
+																		Price: 
+																		{% if course.discount_price %}
+																			<s>${{course.price}}</s> <span>${{course.discount_price}}</span>
+																		{% else %}
+																			<span>${{course.price}}</span>
+																		{% endif %}
+																	</p>
+																	<div class="btns">
+																		<a href="{% url 'cart:add-to-cart' course.id %}" class="btn btn-orange btn-medium" data-animation="animated zoomInUp">
+																			Enroll This Course
+																		</a>
+																	</div>
+																	<div class="course_rat">
+																		<div class="course_rating col-xs-12 col-sm-6 pull-left">
+																			<i class="glyphicons glyphicon-star"></i>
+																			<i class="glyphicons glyphicon-star"></i>
+																			<i class="glyphicons glyphicon-star"></i>
+																			<i class="glyphicons glyphicon-star-empty"></i>
+																			<i class="glyphicons glyphicon-star-empty"></i>
+																		</div>
+																		<p class="enroll col-xs-12 col-sm-6">18.4K Enrolled</p>
+																	</div> 
+																	<ul>
+																		<li><span>Lectures:</span> 10 </li>
+																		<li><span>Language:</span> English </li>
+																		<li><span>Video:</span> 12 hours </li>
+																		<li><span>Duration:</span> 30 days </li>
+																		<li><span>Includes:</span> Certificate of Completion </li>
+																		<li><span> </span>More includes here</li>
+																	</ul>
+																</div>
+																<aside class="widget widget_courses">
+																	<h3 class="widget-title">Similar Classes</h3>
+																	<ul>
+																		<li class="clearfix">
+																			<div class="course-thumbnail">
+																				<img src="{% static 'images/use_img/widget-thumb.jpg' %}" class="course-media-img" alt="">
+																			</div>
+																			<div class="simi-co">
+																				<h5><a href="classes-details.html#">JavaScript: Understanding the Weird Parts</a></h5>
+																				<p class="meta"><a href="classes-details.html#">James Bond</a></p>
+																				<p><span class="simi-price">$65</span>
+																					<span class="rating">
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																					</span>
+																				</p>
+																			</div>
+																		</li>
+																		<li class="clearfix">
+																			<div class="course-thumbnail">
+																				<img src="{% static 'images/use_img/widget-thumb.jpg' %}" class="course-media-img" alt="">
+																			</div>
+																			<div class="simi-co">
+																				<h5><a href="classes-details.html#">Become an iOS Developer from Scratch</a></h5>
+																				<p class="meta"><a href="classes-details.html#">Greg Christman</a></p>
+																				<p><span class="simi-price">$66</span>
+																					<span class="rating">
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																						<i class="glyphicons glyphicon-star"></i>
+																					</span></p>
+																				</div>
+																			</li>
+																			<li class="clearfix">
+																				<div class="course-thumbnail">
+																					<img src="{% static 'images/use_img/widget-thumb.jpg' %}" class="course-media-img" alt="">
+																				</div>
+																				<div class="simi-co">
+																					<h5><a href="classes-details.html#">Ionic by Example: Create Mobile Apps in HTML5</a></h5>
+																					<p class="meta"><a href="classes-details.html#">Emma Wilson</a></p>
+																					<p><span class="simi-price">$35</span>
+																						<span class="rating">
+																							<i class="glyphicons glyphicon-star"></i>
+																							<i class="glyphicons glyphicon-star"></i>
+																							<i class="glyphicons glyphicon-star"></i>
+																							<i class="glyphicons glyphicon-star-empty"></i>
+																							<i class="glyphicons glyphicon-star-empty"></i>
+																						</span>
+																					</p>
+																				</div>
+																			</li>
+																		</ul>
+																	</aside>
+																</div>
+
+															</div> 
+														</div> 
+													</div>
+												</div> 
+												<section class="call-to-action">
+													<div class="container">
+														<div class="row">
+															<div class="col-xs-12">
+																<div class="col-xs-12 col-sm-8">
+																	<h3>Remaining essentially unchanged.</h3>
+																	<p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+																</div>
+																<a href="classes-details.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+															</div>
+														</div> 
+													</div>
+												</section> 
+												{% endblock %}

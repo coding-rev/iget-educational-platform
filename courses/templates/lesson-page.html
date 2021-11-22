@@ -1,0 +1,64 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lessons Page</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+            <div class="main-wrapper">
+                <div class="left"></div>
+                <main>
+                    <div class="main__video">
+                        <div class="main__video-container">
+                            <video controls width="565" height="315" src="{{currentPlay.file.url}}" autoplay></video>
+                                
+                        </div>
+                        <div class="main__description">
+                            <h1 style="font-size:20px;font-weight: 500">{{course.title}}</h1><br>
+                            <p>Tutor: {{course.author}} - 290,399 views</p>
+                        </div>
+                        <div class="main__sub-description" style="justify-content: start;">
+                            <p>
+                            <b style="font-size:18px;font-weight:500">Episode Description</b><br>
+                            {{currentPlay.description}}
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <aside class="aside">
+                        <div class="aside__top-container">
+                            <p>Episodes</p>
+                            <a href="{% url 'courses:list-lessons' %}">BACK</a>
+                        </div>
+                       {% for episode in courseEpisodes %}
+                        <form method="POST" id="my_form">
+                            {% csrf_token %}
+                            <input style="display:none" type="text" value="{{episode.id}}" name="episode_id">
+                            <a style="height: 100px;display:flex; flex-direction:row; color:black;text-decoration:none;">
+                            <img  class="aside__video" src="{{course.image.url}}" alt="Next video">
+                            <div style="padding:2%"></div>
+                            <div style="display: flex;flex-direction: column;justify-content: space-between;">
+                                <p>{{episode.description|truncatewords:"15"}}</p>
+                                <button type="submit" style="width:80px;background:steelblue;color:white;border-radius: 10px;font-weight: 600;">PLAY</button>
+                            </div>
+                            </a>
+                        </form>
+                        {% endfor %}
+                       
+                        
+                        
+                    </aside>
+
+                  
+
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

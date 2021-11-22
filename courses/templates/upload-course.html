@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Upload course {% endblock %}
+{% block uploadActive %}active{% endblock %}
+{% block content %}
+
+      <div class="breadcrumb-section">
+        <div class="container">
+          <div class="row">
+            <header class="entry-header">
+              <h1 class="entry-title">Upload Course on iGet</h1>
+            </header>
+          </div> 
+        </div>
+      </div>
+      <div class="page-spacer clearfix">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 contact-form">
+              <h3>Upload courses</h3>
+              <p>Take this few steps to upload a course on iGet. Uploading course on iGet is free.</p>
+              <div id="success" class="alert alert-success">Your message succesfully sent!</div>
+              <div id="error" class="alert alert-danger">Opps! There is something wrong. Please try again</div>
+              <form class="contactform" method="post" action="http://demos.themecycle.com/eduhtml/edu-kindergarten/contact_process.php" id="contactForm">
+                {% csrf_token %}
+                <p><input type="text" placeholder="Enter course title" required id="fname" name="courseTitle" required></p>
+                <p><textarea placeholder="Enter course description" name="courseDescription" id="message" rows="10" cols="40" required></textarea></p>
+                <p><input type="email" id="email" name="email" required placeholder="Email Address"></p>
+                <p><textarea placeholder="Message" name="message" id="message" rows="10" cols="40"></textarea></p>
+                <p><input type="submit" class="btn btn-default" value="submit now">
+                </form>
+              </div> 
+
+              title     = models.CharField(max_length=225)
+  description   = models.TextField()
+  created     = models.DateTimeField(auto_now_add=True)
+  updated     = models.DateTimeField(auto_now=True)
+  rating      = models.ManyToManyField('Rate',blank=True)
+  author      = models.ForeignKey(User, on_delete=models.CASCADE)
+  student_rating  = models.IntegerField(default=0)
+  language      = models.CharField(max_length=225)
+  course_length   = models.CharField(default=0,max_length=20)
+  course_sections = models.ManyToManyField('CourseSection',blank=True)
+  comment     = models.ManyToManyField('Comment',blank=True)
+  image       = models.ImageField()
+  free_price    = models.BooleanField(default=False, verbose_name="Free Course")
+  price       = models.DecimalField(max_digits=5 ,decimal_places=2)
+  discount_price  = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+
+
+
+              <div class="col-xs-12 col-sm-6 contact-info">
+                <div class="col-xs-12 col-sm-6">
+                  <h3 class="head-border-default">Education Press</h3>
+                  <p class="address"><i class="fa fa-map-marker"></i>2036 Thunder Road CA 94612
+                    Oakland, opp. of geon tower
+                  Pincode - 580089</p>
+                  
+                  <ul class="social-icons">
+                    <li><a href="contactus.html#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="contactus.html#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="contactus.html#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="contactus.html#"><i class="fa fa-linkedin"></i></a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <h3 class="head-border-default">Customer Supprt</h3>
+                  <p class="phone"><i class="fa fa-phone"></i>0546 873 228</p>
+                  
+                </div>
+                <div class="col-xs-12 col-sm-12 have-question">
+                  <h3>Have Any Question?</h3>
+                  <p>Various versions years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                  <a href="contactus.html#" class="btn btn-blue btn-medium">Ask a Question</a>
+                </div>
+              </div> 
+              
+            </div> 
+          </div>
+        </div> 
+        <section class="call-to-action">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-8">
+                  <h3>Remaining essentially unchanged.</h3>
+                  <p>When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <a href="contactus.html#" class="btn btn-medium btn-default pull-right">Know More <i class="lnr lnr-arrow-right"></i></a>
+              </div>
+            </div> 
+          </div>
+        </section> 
+       {% endblock %}
