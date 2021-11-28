@@ -13,6 +13,17 @@
           </div> 
         </div>
       </div>
+
+
+      {% if messages %}
+                      {% for message in messages %}
+                        <div  class="alert alert-{{message.tags }}" style="color:blue" role="alert">
+                            {{message}}
+                        </div>
+                      {% endfor %}
+                    {% endif %}  
+
+
       <div class="page-spacer clearfix">
         <div class="container">
           <div class="row">
@@ -21,34 +32,44 @@
               <p>Take this few steps to upload a course on iGet. Uploading course on iGet is free.</p>
               <div id="success" class="alert alert-success">Your message succesfully sent!</div>
               <div id="error" class="alert alert-danger">Opps! There is something wrong. Please try again</div>
-              <form class="contactform" method="post" action="http://demos.themecycle.com/eduhtml/edu-kindergarten/contact_process.php" id="contactForm">
+              
+              <form class="contactform" enctype="multipart/form-data" method="POST" id="contactForm">
                 {% csrf_token %}
-                <p><input type="text" placeholder="Enter course title" required id="fname" name="courseTitle" required></p>
-                <p><textarea placeholder="Enter course description" name="courseDescription" id="message" rows="10" cols="40" required></textarea></p>
-                <p><input type="email" id="email" name="email" required placeholder="Email Address"></p>
-                <p><textarea placeholder="Message" name="message" id="message" rows="10" cols="40"></textarea></p>
-                <p><input type="submit" class="btn btn-default" value="submit now">
+                <h4>Image</h4>
+                <p><input type="file" id="fname" name="c-image" required></p>
+
+
+                <h4>Course Info</h4>
+
+                <i>Title* </i>
+                <p><input type="text" placeholder="Enter course title" required id="fname" name="c-title" required></p>
+
+                <i>Language(s)* </i>
+                <p><input type="text" id="language" name="c-language" placeholder="Enter tutorial langugage(s)" required></p>
+
+                <i>Length* </i>
+                <p><input type="text" id="courseLength" name="c-length" required placeholder="Enter course length"></p>
+
+                <i>Description* </i>
+                <p><textarea placeholder="Enter course description" name="c-description" id="message" rows="10" cols="40" required></textarea></p>
+                
+                <h4>Pricing</h4>
+                
+                <i>Free (Tick if free)</i>
+                <p><input style="zoom:2" type="checkbox" name="c-free"></p>
+                
+                <i>Price* </i>
+                <p><input type="text" name="c-price" placeholder="Enter price" required></p>
+
+                 <i>Discount price(optional) </i>
+                <p><input type="text" name="c-discount" placeholder="Enter discount price"></p>
+
+
+                <p><input type="submit" class="btn btn-default" value="upload course">
                 </form>
               </div> 
 
-              title     = models.CharField(max_length=225)
-  description   = models.TextField()
-  created     = models.DateTimeField(auto_now_add=True)
-  updated     = models.DateTimeField(auto_now=True)
-  rating      = models.ManyToManyField('Rate',blank=True)
-  author      = models.ForeignKey(User, on_delete=models.CASCADE)
-  student_rating  = models.IntegerField(default=0)
-  language      = models.CharField(max_length=225)
-  course_length   = models.CharField(default=0,max_length=20)
-  course_sections = models.ManyToManyField('CourseSection',blank=True)
-  comment     = models.ManyToManyField('Comment',blank=True)
-  image       = models.ImageField()
-  free_price    = models.BooleanField(default=False, verbose_name="Free Course")
-  price       = models.DecimalField(max_digits=5 ,decimal_places=2)
-  discount_price  = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-
-
-
+            
               <div class="col-xs-12 col-sm-6 contact-info">
                 <div class="col-xs-12 col-sm-6">
                   <h3 class="head-border-default">Education Press</h3>

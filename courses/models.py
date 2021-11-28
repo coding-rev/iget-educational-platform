@@ -41,8 +41,8 @@ class Courses(models.Model):
 	comment  		= models.ManyToManyField('Comment',blank=True)
 	image  			= models.ImageField()
 	free_price 		= models.BooleanField(default=False, verbose_name="Free Course")
-	price  			= models.DecimalField(max_digits=5 ,decimal_places=2)
-	discount_price  = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+	price  			= models.IntegerField()
+	discount_price  = models.IntegerField(blank=True, null=True)
 
 	def __str__(self):
 		return self.title 
@@ -52,7 +52,7 @@ class Courses(models.Model):
 class Episode(models.Model):
 	title  			= models.CharField(max_length=225)
 	file  			= models.FileField()
-	length  		= models.DecimalField(max_digits=100,decimal_places=2)
+	length  		= models.IntegerField()
 	course 			= models.ForeignKey(Courses, on_delete=models.CASCADE) 	
 	description 	= models.CharField(max_length=30)		 
 
