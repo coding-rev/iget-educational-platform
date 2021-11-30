@@ -49,29 +49,18 @@
 							<h3>Curriculum</h3>
 
 							{% for episode in courseEpisodes %}
-								<h4>Section 1: Introduction</h4>
+								<h4>Episodes</h4>
 								<ul>
-									<li class="courses-open"><span class="no">1</span>
+									<li class="courses-open"><span class="no">{{forloop.counter}}</span>
 										<p class="ctitle">
-											<span class="title"><i class="fa fa-play-circle"></i> Welcome to the Course! <a href="classes-details.html#"><i class="fa fa-angle-down"></i></a></span>
+												<span class="title"><i class="fa fa-play-circle"></i> {{episode.title}} <a href="{% url 'courses:lesson' course.id %}"><i class="fa fa-angle-down"></i></a></span>
 											<span class="type">Video</span></p>
 											<span class="preview">Preview</span>
 											<p class="other">
 												<span class="time"><i class="fa fa-clock-o"></i> 11:30</span>
 												<span class="info"><i class="fa fa-lock"></i> PDF file</span></p>
 											</li>
-											<li class="courses-close"><span class="no">2</span>
-												<p class="ctitle">
-													<span class="title"><i class="fa fa-file"></i> Course Introduction and Manual<a href="classes-details.html#"><i class="fa fa-angle-up"></i></a></span>
-													<span class="type free">Free</span></p>
-													<p class="other">
-														<span class="info"><i class="fa fa-paperclip"></i> PDF file</span></p>
-														<div class="desc">
-															<p>It has survived not only five centuries.
-															but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-															<p><a href="classes-details.html#">Download PDF</a></p>
-														</div>
-													</li>
+											
 												</ul>
 								{% endfor %}
 																 

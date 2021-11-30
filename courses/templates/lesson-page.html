@@ -37,6 +37,11 @@
                             <a href="{% url 'courses:list-lessons' %}">BACK</a>
                         </div>
                        {% for episode in courseEpisodes %}
+                       <div 
+                       {% if episode.id == currentPlay.id  %}
+                        style="background:ghostwhite; border-left: 5px solid red;padding: 1%;"
+                       {% endif %}
+                        >
                         <form method="POST" id="my_form">
                             {% csrf_token %}
                             <input style="display:none" type="text" value="{{episode.id}}" name="episode_id">
@@ -45,10 +50,25 @@
                             <div style="padding:2%"></div>
                             <div style="display: flex;flex-direction: column;justify-content: space-between;">
                                 <p>{{episode.description|truncatewords:"15"}}</p>
-                                <button type="submit" style="width:80px;background:steelblue;color:white;border-radius: 10px;font-weight: 600;">PLAY</button>
+                                <button type="submit" style="width:120px;height: 30px;background:orangered;color:white;border-radius: 10px;font-weight: 600;">
+                                        
+                                    {% if episode.id == currentPlay.id %}
+                                        Playing
+                                    {% else %}
+                                        Play
+                                    {% endif %}
+                                
+
+                                </button>
                             </div>
                             </a>
                         </form>
+                        </div>
+                        <br>
+                        {% empty %}
+                        
+                            <h2 style="font-weight:500; font-size:30px; font-family: poppins;">No episodes</h2>
+                        
                         {% endfor %}
                        
                         

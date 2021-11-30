@@ -13,4 +13,9 @@ urlpatterns=[
     path("lesson/<int:pk>", views.userLessonsPage, name="lesson"),
 
     path("upload-course", views.uploadCourse, name="upload-course"),
+    path("upload-episodes/<int:pk>", views.uploadEpisodes, name="upload-episodes"),
+
+    path('delete-course/<int:pk>', views.deleteCourse, name='delete-course'),
+    
+    path("my-uploaded-courses-list", views.myUploadedCoursesList, name="my-uploaded-courses")
 ]

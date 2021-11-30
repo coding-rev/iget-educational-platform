@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponse
 from .models import Courses, Episode
 from cart.models import Order
@@ -54,13 +55,28 @@ class userRegisteredCourses(LoginRequiredMixin, View):
 
 		try:
 			order = Order.objects.filter(user=self.request.user, ordered=True)
-			print(len(order))
 			context = {
 				'objects':order
 			}
 			return render(self.request, 'events.html', context)
 		except Order.DoesNotExist:
 			return render(self.request, 'events.html')
+
+@login_required
+def myUploadedCoursesList(request):
+	objects =  Courses.objects.filter(author=request.user)
+	context ={
+		"objects":objects
+	}
+	return render(request, 'my-uploaded-course.html', context)
+
+@login_required
+def deleteCourse(request, pk):
+	course 		= Courses.objects.get(id=pk)
+	course.delete()
+	messages.success(request, "Course deleted successfully")
+	return redirect('courses:my-uploaded-courses')
+
 
 @login_required
 def userLessonsPage(request, pk):
@@ -104,21 +120,41 @@ def uploadCourse(request):
 			getPrice   		= request.POST.get('c-price')
 			getDiscount  	= request.POST.get('c-discount')
 
-			if getFree:
-				course 		= Courses.objects.create(
-								title=getTitle, description=getDescription,
-								author=request.user, language=getLanguage,
-								course_length=getLength, free_price=True, image=getImage,
-								price=getPrice, discount_price=getDiscount)
-			else: 
-				course 		= Courses.objects.create(
-								title=getTitle, description=getDescription,
-								author=request.user, language=getLanguage,
-								course_length=getLength, free_price=False, image=getImage,
-								price=getPrice, discount_price=getDiscount)
+			try:
+				if getFree:
+					course 		= Courses.objects.create(
+									title=getTitle, description=getDescription,
+									author=request.user, language=getLanguage,
+									course_length=getLength, free_price=True, image=getImage,
+									price=getPrice, discount_price=getDiscount,
+									)
+				else: 
+					course 		= Courses.objects.create(
+									title=getTitle, description=getDescription,
+									author=request.user, language=getLanguage,
+									course_length=getLength, free_price=False, image=getImage,
+									price=getPrice, discount_price=getDiscount
+									)
+			except:
+				if getFree:
+					course 		= Courses.objects.create(
+									title=getTitle, description=getDescription,
+									author=request.user, language=getLanguage,
+									course_length=getLength, free_price=True, image=getImage,
+									price=getPrice
+									)
+				else: 
+					course 		= Courses.objects.create(
+									title=getTitle, description=getDescription,
+									author=request.user, language=getLanguage,
+									course_length=getLength, free_price=False, image=getImage,
+									price=getPrice
+									)
 				
 			messages.success(request, "Course uploaded successfully")
-			return redirect('courses:upload-course')
+			return redirect(reverse('courses:upload-episodes', kwargs={
+				'pk':course.id
+				}))
 
 		except Exception as e:
 			messages.error(request, "Error occured "+str(e))
@@ -127,4 +163,28 @@ def uploadCourse(request):
 	return render(request, 'upload-course.html')
 
 
+@login_required
+def uploadEpisodes(request, pk):
+	if request.method == 'POST':
+		try:
+			getCourse 		= Courses.objects.get(id=pk)
+			getTitle   	= request.POST.get('e-title')
+			getFile  	= request.FILES.get('e-file')
+			getDescription = request.POST.get('e-description')
 
+			episode 	= Episode.objects.create(
+								title=getTitle, file=getFile, 
+								course=getCourse, description=getDescription
+								)
+			messages.success(request, 'Episode uploaded for course successfully')
+			return redirect(reverse('courses:upload-episodes', kwargs={
+				'pk':pk
+				}))		
+
+		except Exception as e:
+			messages.error(request, "Error occured "+ str(e))
+			return redirect(reverse('courses:upload-episodes', kwargs={
+				'pk':pk
+				}))
+
+	return render(request, 'upload-episodes.html')
