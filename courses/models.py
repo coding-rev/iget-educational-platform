@@ -5,7 +5,7 @@ User = get_user_model()
 
 # Create your models here.
 class Rate(models.Model):
-	rate_number  		= models.IntegerField(range(0,5))
+	rate_number  		= models.IntegerField()
 
 
 class CourseSection(models.Model):
@@ -22,14 +22,14 @@ class CourseSection(models.Model):
 
 class Comment(models.Model):
 	user  			= models.ForeignKey(User,on_delete=models.CASCADE)
-	message  		= models.TextField()
+	message  		= models.CharField(max_length=225)
 	created  		= models.DateTimeField(auto_now=True)
 
 
 
 class Courses(models.Model):
 	title			= models.CharField(max_length=225)
-	description		= models.TextField()
+	description		= models.CharField(max_length=225)
 	created			= models.DateTimeField(auto_now_add=True)
 	updated			= models.DateTimeField(auto_now=True)
 	rating 			= models.ManyToManyField('Rate',blank=True)
